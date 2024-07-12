@@ -7,7 +7,6 @@ const FlightBookingForm = () => {
   const [destination, setDestination] = useState('');
   const [cabin, setCabin] = useState('economy');
   const [submitted, setSubmitted] = useState(false);
-  const [randomAirline, setRandomAirline] = useState('');
   const [fetchData, setFetchData] = useState([]);
 
   const handleOriginChange = (e) => {
@@ -28,9 +27,7 @@ const FlightBookingForm = () => {
     await fetchRecords();
   };
 
-  const handleRandomPartnerChange = (partner) => {
-    setRandomAirline(partner);
-  };
+
 
   const fetchRecords = async () => {
     try {
@@ -74,21 +71,19 @@ const FlightBookingForm = () => {
 
           <button type="submit">Search</button>
         </form>
-        {submitted && <RandomAirline onRandomPartnerChange={handleRandomPartnerChange} />}
         {submitted && (
           <>
             <div className="results">
-              {fetchData.map((data) => (
-                <div className="box" key={data.id}>
-                  <h3>{data.partnerProgram.join(', ')}</h3>
-                  <h2>{randomAirline}</h2>
-                  <span>{origin}&rarr;{destination}</span>
-                  <p>{data.departure}&rarr;{data.arrival}</p>
-                  <h2>144600</h2>
+              {fetchData.map((data, index) => (
+                <div className="box" key={index}>
+                  <h2>{data.partner_program}</h2>
+                  <p>{origin}&rarr;{destination}</p>
+                  <span>2024-07-09 - 2024-10-07</span>
+                  <h2>{data.min_business_miles}</h2>
                   <p>Min Business Miles</p>
-                  <h2>55200</h2>
+                  <h2>{data.min_economy_miles}</h2>
                   <p>Min Economy Miles</p>
-                  <h1>N/A</h1>
+                  <h2>N/A</h2>
                   <p>Min First Miles</p>
                 </div>
               ))}

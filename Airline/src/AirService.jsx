@@ -6,7 +6,7 @@ export const api = axios.create({
 
 export const getAllData = async() =>{
     try {
-      const response = await api.get("/getRecords")
+      const response = await api.get("/getFlights")
       return response.data
     } catch (error) {
       console.error(error)
